@@ -9,3 +9,6 @@ variable "instance_type" {
   description = "Type of EC2 instance"
   default     = "t2.micro"
 }
+variable "key_name" {
+  description = "Name of the key pair to associate with EC2 instances"
+}
