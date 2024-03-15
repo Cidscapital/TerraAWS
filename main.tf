@@ -7,6 +7,7 @@ module "vpc" {
 module "security_group" {
   source = "./security_group"
   region = "us-east-1"
+  vpc_id = module.vpc.vpc_id  # Pass VPC ID here
 }
 
 module "ec2" {
