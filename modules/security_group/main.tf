@@ -1,5 +1,5 @@
 resource "aws_security_group" "tf_sg" {
-  name        = "sg-tf"
+  name        = "tf-sg"  # Rename the security group to a valid name
   description = "Security group for Terraform"
   vpc_id      = var.vpc_id
 
@@ -30,8 +30,4 @@ resource "aws_security_group" "tf_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-}
-
-output "security_group_id" {
-  value = aws_security_group.tf_sg.id
 }
