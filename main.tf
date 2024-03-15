@@ -11,6 +11,4 @@ module "security_group" {
 module "ec2" {
   source     = "./modules/ec2"
   subnet_ids = module.vpc.public_subnet_ids
-  ami        = var.ami
-  instance_type = var.instance_type
 }
