@@ -13,5 +13,4 @@ module "ec2" {
   subnet_ids = module.vpc.public_subnet_ids
   ami        = var.ami
   instance_type = var.instance_type
-  key_name   = "tf-key"
 }

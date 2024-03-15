@@ -12,6 +12,7 @@ resource "aws_instance" "web_servers" {
     apt-get install -y nginx
     apt-get install -y docker.io
     systemctl start docker
+    docker pull nginx
     docker run -d -p 8080:80 nginx
     docker run -d -p 8081:80 nginx
   EOF
