@@ -1,5 +1,5 @@
 resource "aws_security_group" "tf_sg" {
-  name        = "tf-security-group"  # Update the name of the security group
+  name        = "tf-security-group"
   description = "Security group for Terraform"
   vpc_id      = var.vpc_id
 
