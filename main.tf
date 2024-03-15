@@ -25,7 +25,7 @@ module "ec2" {
 }
 
 # Output Public Subnet IDs (Optional)
-output "public_subnet_ids" {
+output "vpc_public_subnet_ids" {
   value = module.vpc.public_subnet_ids
   description = "List of public subnet IDs"
 }
