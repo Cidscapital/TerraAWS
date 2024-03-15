@@ -6,7 +6,8 @@ resource "aws_instance" "web_servers" {
 
   user_data = <<-EOF
               #!/bin/bash
-              yum install docker -y
+              apt-get update
+              apt-get install -y docker.io
               systemctl start docker
               docker run -d -p 8080:80 nginx
               docker run -d -p 8081:80 nginx
