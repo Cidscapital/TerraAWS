@@ -18,4 +18,5 @@ module "ec2" {
   ec2_count   = 4
   subnet_ids      = module.vpc.public_subnet_ids  # Pass subnet IDs here
   public_key_path = "./tf-key.pem"
+  security_group_id    = module.security_group.security_group_id  # Pass security group ID here
 }

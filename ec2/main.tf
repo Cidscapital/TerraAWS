@@ -13,6 +13,7 @@ resource "aws_instance" "ec2" {
   instance_type = var.instance_type
   subnet_id     = element(var.subnet_ids, count.index)  # Updated line
   key_name      = aws_key_pair.tf_key.key_name
+  security_groups = [var.security_group_id]  # Use the passed security group ID
 
   provisioner "remote-exec" {
     inline = [
