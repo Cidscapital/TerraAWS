@@ -7,7 +7,7 @@ module "vpc" {
 
 module "security_group" {
   source = "./security_group"
-  region = "us-east-1"
+  region = ["us-east-1"]
 }
 
 module "ec2" {
