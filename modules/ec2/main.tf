@@ -3,7 +3,7 @@ resource "aws_instance" "web_servers" {
   ami           = var.ami
   instance_type = var.instance_type
   subnet_id     = element(var.subnet_ids, count.index)
-  key_name      = var.key_name  # Specify the key pair name here
+  key_name      = "tf-key"  # Specify the key pair name here
 
   user_data = <<-EOF
               #!/bin/bash
