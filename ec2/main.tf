@@ -4,7 +4,6 @@ provider "aws" {
 
 resource "aws_key_pair" "tf_key" {
   key_name   = "tf-key"
-  public_key = file(var.public_key_path)
 }
 
 resource "aws_instance" "ec2" {

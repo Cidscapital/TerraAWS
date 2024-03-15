@@ -19,9 +19,7 @@ variable "subnet_ids" {
   type        = list(string)
 }
 
-variable "public_key_path" {
-  description = "The path to the public key file"
-}
+
 
 variable "security_group_id" {
   description = "The ID of the security group to associate with EC2 instances"
