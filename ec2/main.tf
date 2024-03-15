@@ -2,16 +2,12 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_key_pair" "tf_key" {
-  key_name   = "tf-key"
-}
-
 resource "aws_instance" "ec2" {
   count         = var.ec2_count
   ami           = var.ami
   instance_type = var.instance_type
   subnet_id     = element(var.subnet_ids, count.index)  # Updated line
-  key_name      = aws_key_pair.tf_key.key_name
+  key_name      = "tf-key"
   security_groups = [var.security_group_id]  # Use the passed security group ID
 
   provisioner "remote-exec" {
