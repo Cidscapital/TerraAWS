@@ -4,7 +4,7 @@ variable "subnet_ids" {
 
 variable "ami" {
   description = "AMI for the EC2 instances"
-  default     = "ami-0c55b159cbfafe1f0"
+  default     = "ami-07d9b9ddc6cd8dd30"
 }
 
 variable "instance_type" {
