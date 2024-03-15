@@ -10,7 +10,7 @@ module "ec2" {
   source = "./ec2"
 
   region      = "us-east-1"
-  ami         = "ami-12345678"
+  ami         = "ami-02d7fd1c2af6eead0"
   instance_type = "t2.micro"
   ec2_count   = 4
   subnet_ids  = module.vpc.public_subnet_ids
