@@ -23,4 +23,9 @@ resource "aws_security_group" "tf_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  
+  # Output the security group id
+  output "security_group_id" {
+    value = aws_security_group.tf_sg.id
+  }
 }
