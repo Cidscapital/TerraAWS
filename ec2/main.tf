@@ -11,7 +11,7 @@ resource "aws_instance" "ec2" {
   count         = var.ec2_count
   ami           = var.ami
   instance_type = var.instance_type
-  subnet_id     = element(module.vpc.public_subnet_ids, count.index)
+  subnet_id     = element(var.subnet_ids, count.index)  # Updated line
   key_name      = aws_key_pair.tf_key.key_name
 
   provisioner "remote-exec" {

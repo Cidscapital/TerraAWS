@@ -14,6 +14,11 @@ variable "ec2_count" {
   description = "The number of EC2 instances to create"
 }
 
+variable "subnet_ids" {
+  description = "A list of subnet IDs to associate with EC2 instances"
+  type        = list(string)
+}
+
 variable "public_key_path" {
   description = "The path to the public key file"
 }
