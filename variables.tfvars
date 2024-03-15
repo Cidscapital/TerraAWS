@@ -1,1 +1,1 @@
-variable "key_name" = "tf-key"
+key_name  = "tf-key"
