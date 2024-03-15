@@ -2,12 +2,12 @@ module "vpc" {
   source = "./vpc"
   region             = "us-east-1"
   vpc_cidr_block     = "192.168.0.0/16"
-  availability_zones = "us-east-1"
+  availability_zones = ["us-east-1"]
 }
 
 module "security_group" {
   source = "./security_group"
-  region = ["us-east-1"]
+  region = "us-east-1"
 }
 
 module "ec2" {
