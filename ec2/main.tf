@@ -6,14 +6,17 @@ resource "aws_instance" "ec2" {
   key_name      = "tf-key"
   security_groups = [var.security_group_id]  # Use the passed security group ID
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo yum install docker -y",
-      "sudo service docker start",
-      "sudo docker run -d -p 80:80 nginx",
-      "sudo docker run -d -p 8080:8080 nginx",
-      "sudo docker run -d -p 8081:8081 nginx"
-    ]
+  user_data = <<-EOF
+              #!/bin/bash
+              sudo yum install docker -y
+              sudo service docker start
+              sudo docker run -d -p 80:80 nginx
+              sudo docker run -d -p 8080:8080 nginx
+              sudo docker run -d -p 8081:8081 nginx
+              EOF
+
+  tags = {
+    Name = "EC2Instance-${count.index}"
   }
 }
 
