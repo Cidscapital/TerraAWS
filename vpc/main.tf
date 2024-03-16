@@ -7,6 +7,15 @@ resource "aws_vpc" "main" {
   }
 }
 
+# Create Internet Gateway and attach it to the VPC
+resource "aws_internet_gateway" "example" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name = "example-igw"
+  }
+}
+
 resource "aws_subnet" "public" {
   count             = 4
   vpc_id            = aws_vpc.main.id
