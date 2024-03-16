@@ -1,20 +1,202 @@
-module "vpc" {
-  source = "./vpc"
+provider "aws" {
+  region = "us-east-1"  # Replace with your desired AWS region
+}
+
+resource "aws_vpc" "tf-vpc" {
   vpc_cidr_block     = "192.168.0.0/16"
-  availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d"]
-  vpc_id = module.vpc.vpc_id
+  tags = {
+    Name = "tf-vpc"
+  }
 }
 
-module "security_group" {
-  source = "./security_group"
-  vpc_id = module.vpc.vpc_id
+resource "aws_subnet" "tf-subnet-1" {
+  vpc_id     = aws_vpc.tf-vpc.id
+  cidr_block = "192.168.1.0/24"
+  availability_zone = "us-east-1a"
+  tags = {
+    Name = "tf-subnet-1"
+  }
 }
 
-module "ec2" {
-  source = "./ec2"
-  ami         = "ami-02d7fd1c2af6eead0"
+resource "aws_subnet" "tf-subnet-2" {
+  vpc_id     = aws_vpc.tf-vpc.id
+  cidr_block = "192.168.2.0/24"
+  availability_zone = "us-east-1b"
+  tags = {
+    Name = "tf-subnet-2"
+  }
+}
+
+resource "aws_subnet" "tf-subnet-3" {
+  vpc_id     = aws_vpc.tf-vpc.id
+  cidr_block = "192.168.3.0/24"
+  availability_zone = "us-east-1c"
+  tags = {
+    Name = "tf-subnet-3"
+  }
+}
+
+resource "aws_subnet" "tf-subnet-4" {
+  vpc_id     = aws_vpc.tf-vpc.id
+  cidr_block = "192.168.4.0/24"
+  availability_zone = "us-east-1d"
+  tags = {
+    Name = "tf-subnet-4"
+  }
+}
+
+resource "aws_internet_gateway" "tf-igw" {
+  vpc_id = aws_vpc.tf-vpc.id
+  tags = {
+    Name = "tf-vpc-IGW"
+    }
+}
+
+resource "aws_route_table" "tf-route-table" {
+  vpc_id = aws_vpc.tf-vpc.id
+  tags = {
+    Name = "tf-route-table"
+  }
+}
+
+resource "aws_route" "tf-route" {
+  route_table_id         = aws_route_table.tf-route-table.id
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id             = aws_internet_gateway.tf-igw.id
+}
+
+resource "aws_route_table_association" "tf-subnet-1-association" {
+  subnet_id      = aws_subnet.tf-subnet-1.id
+  route_table_id = aws_route_table.tf-route-table.id
+}
+
+resource "aws_route_table_association" "tf-subnet-2-association" {
+  subnet_id      = aws_subnet.tf-subnet-2.id
+  route_table_id = aws_route_table.tf-route-table.id
+}
+
+resource "aws_route_table_association" "tf-subnet-3-association" {
+  subnet_id      = aws_subnet.tf-subnet-3.id
+  route_table_id = aws_route_table.tf-route-table.id
+}
+
+resource "aws_route_table_association" "tf-subnet-4-association" {
+  subnet_id      = aws_subnet.tf-subnet-4.id
+  route_table_id = aws_route_table.tf-route-table.id
+}
+
+resource "aws_eip" "nat-eip" {
+  vpc = true
+   tags = {
+      Name = "nat-eip"
+      }
+}
+
+resource "aws_nat_gateway" "nat-gateway" {
+  allocation_id = aws_eip.nat-eip.id
+  subnet_id     = aws_subnet.tf-subnet-1.id
+  tags = {
+      Name = "nat-gateway"
+      }
+}
+
+resource "aws_nat_gateway" "nat-gateway" {
+  allocation_id = aws_eip.nat-eip.id
+  subnet_id     = aws_subnet.tf-subnet-2.id
+  tags = {
+      Name = "nat-gateway"
+      }
+}
+
+resource "aws_nat_gateway" "nat-gateway" {
+  allocation_id = aws_eip.nat-eip.id
+  subnet_id     = aws_subnet.tf-subnet-3.id
+  tags = {
+      Name = "nat-gateway"
+      }
+}
+
+resource "aws_nat_gateway" "nat-gateway" {
+  allocation_id = aws_eip.nat-eip.id
+  subnet_id     = aws_subnet.tf-subnet-4.id
+  tags = {
+      Name = "nat-gateway"
+      }
+}
+
+resource "aws_security_group" "web-sg" {
+  vpc_id = aws_vpc.tf-vpc.id
+  name   = "web-sg"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8080
+    to_port     = 8080
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 8081
+    to_port     = 8081
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Allow access to Docker containers
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "web-sg"
+  }
+}
+
+resource "aws_instance" "tf-instance-1" {
+  ami           = "ami-09fd16644beea3565"
   instance_type = "t2.micro"
-  ec2_count   = 4
-  subnet_ids      = module.vpc.public_subnet_ids  # Pass subnet IDs here
-  security_group_id    = module.security_group.security_group_id  # Pass security group ID here
+  subnet_id     = aws_subnet.tf-subnet-1.id
+  key_name      = "tf-key"
+  tags = {
+    Name = "tf-instance-1"
+  }
+}
+
+resource "aws_instance" "tf-instance-2" {
+  ami           = "ami-09fd16644beea3565"
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.tf-subnet-2.id
+  key_name      = "tf-key"
+  tags = {
+    Name = "tf-instance-2"
+  }
+}
+
+resource "aws_instance" "tf-instance-3" {
+  ami           = "ami-09fd16644beea3565"
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.tf-subnet-3.id
+  key_name      = "tf-key"
+  tags = {
+    Name = "tf-instance-3"
+  }
+}
+
+resource "aws_instance" "tf-instance-4" {
+  ami           = "ami-09fd16644beea3565"
+  instance_type = "t2.micro"
+  subnet_id     = aws_subnet.tf-subnet-4.id
+  key_name      = "tf-key"
+  tags = {
+    Name = "tf-instance-4"
+  }
 }
