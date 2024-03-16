@@ -4,10 +4,10 @@ provider "aws" {
 
 resource "aws_vpc" "tf-vpc" {
   cidr_block     = "192.168.0.0/16"
-  enable_dns_support = “true” #gives you an internal domain name
-  enable_dns_hostnames = “true” #gives you an internal host name
-  enable_classiclink = “false”
-  instance_tenancy = “default”    
+  enable_dns_support = "true" #gives you an internal domain name
+  enable_dns_hostnames = "true" #gives you an internal host name
+  enable_classiclink = "false"
+  instance_tenancy = "default"    
   tags = {
     Name = "tf-vpc"
   }
@@ -16,7 +16,7 @@ resource "aws_vpc" "tf-vpc" {
 resource "aws_subnet" "tf-subnet-1" {
   vpc_id     = aws_vpc.tf-vpc.id
   cidr_block = "192.168.1.0/24"
-  map_public_ip_on_launch = “true” //it makes this a public subnet
+  map_public_ip_on_launch = "true" //it makes this a public subnet
   availability_zone = "us-east-1a"
   tags = {
     Name = "tf-subnet-1"
@@ -26,7 +26,7 @@ resource "aws_subnet" "tf-subnet-1" {
 resource "aws_subnet" "tf-subnet-2" {
   vpc_id     = aws_vpc.tf-vpc.id
   cidr_block = "192.168.2.0/24"
-  map_public_ip_on_launch = “true” //it makes this a public subnet
+  map_public_ip_on_launch = "true" //it makes this a public subnet
   availability_zone = "us-east-1b"
   tags = {
     Name = "tf-subnet-2"
@@ -36,7 +36,7 @@ resource "aws_subnet" "tf-subnet-2" {
 resource "aws_subnet" "tf-subnet-3" {
   vpc_id     = aws_vpc.tf-vpc.id
   cidr_block = "192.168.3.0/24"
-  map_public_ip_on_launch = “true” //it makes this a public subnet
+  map_public_ip_on_launch = "true" //it makes this a public subnet
   availability_zone = "us-east-1c"
   tags = {
     Name = "tf-subnet-3"
@@ -46,7 +46,7 @@ resource "aws_subnet" "tf-subnet-3" {
 resource "aws_subnet" "tf-subnet-4" {
   vpc_id     = aws_vpc.tf-vpc.id
   cidr_block = "192.168.4.0/24"
-  map_public_ip_on_launch = “true” //it makes this a public subnet
+  map_public_ip_on_launch = "true" //it makes this a public subnet
   availability_zone = "us-east-1d"
   tags = {
     Name = "tf-subnet-4"
