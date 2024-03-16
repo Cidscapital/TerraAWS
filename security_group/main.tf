@@ -55,11 +55,11 @@ resource "aws_security_group_rule" "allow_dns_ingress" {
   description       = "Allow DNS queries (UDP) from anywhere"
 }
 
-resource "aws_security_group" "allow_dns_ingress" {
+resource "aws_security_group" "allow_dns_egress" {
   name        = "egress"
   description = "Allow DNS egress"
 
-  vpc_id = aws_vpc.main.id
+  vpc_id = var.vpc_id
 
   egress {
     from_port   = 53

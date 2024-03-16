@@ -2,6 +2,7 @@ module "vpc" {
   source = "./vpc"
   vpc_cidr_block     = "192.168.0.0/16"
   availability_zones = ["us-east-1a", "us-east-1b", "us-east-1c", "us-east-1d"]
+  vpc_id = module.vpc.vpc_id
 }
 
 module "security_group" {

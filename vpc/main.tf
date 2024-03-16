@@ -9,7 +9,7 @@ resource "aws_vpc" "main" {
 
 # Create Internet Gateway and attach it to the VPC
 resource "aws_internet_gateway" "example" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = var.vpc_id
 
   tags = {
     Name = "example-igw"
