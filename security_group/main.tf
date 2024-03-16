@@ -45,6 +45,16 @@ resource "aws_security_group" "tf_sg" {
   }
 }
 
+resource "aws_security_group_rule" "allow_dns_ingress" {
+  type              = "ingress"
+  from_port         = 53
+  to_port           = 53
+  protocol          = "udp"
+  security_group_id = aws_security_group.tf_sg.id
+  cidr_blocks       = ["0.0.0.0/0"]
+  description       = "Allow DNS queries (UDP) from anywhere"
+}
+
 output "security_group_id" {
   value = aws_security_group.tf_sg.id
 }

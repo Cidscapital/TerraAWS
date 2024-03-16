@@ -20,6 +20,18 @@ resource "aws_instance" "ec2" {
   }
 }
 
+resource "aws_eip" "example" {
+  count = var.ec2_count
+
+  vpc      = true
+}
+
+resource "aws_eip_association" "example" {
+  count         = var.ec2_count
+  instance_id   = aws_instance.ec2[count.index].id
+  allocation_id = aws_eip.example[count.index].id
+}
+
 output "ec2_public_ips" {
   value = aws_instance.ec2[*].public_ip
 }
