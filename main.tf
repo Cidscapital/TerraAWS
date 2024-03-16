@@ -123,7 +123,7 @@ resource "aws_security_group" "web-sg" {
 }
 
 resource "aws_instance" "tf-instance-1" {
-  ami           = "ami-080e1f13689e07408 "
+  ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.tf-subnet-1.id
   key_name      = "tf-key"
@@ -133,7 +133,7 @@ resource "aws_instance" "tf-instance-1" {
 }
 
 resource "aws_instance" "tf-instance-2" {
-  ami           = "ami-080e1f13689e07408 "
+  ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.tf-subnet-2.id
   key_name      = "tf-key"
@@ -143,7 +143,7 @@ resource "aws_instance" "tf-instance-2" {
 }
 
 resource "aws_instance" "tf-instance-3" {
-  ami           = "ami-080e1f13689e07408 "
+  ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.tf-subnet-3.id
   key_name      = "tf-key"
@@ -153,7 +153,7 @@ resource "aws_instance" "tf-instance-3" {
 }
 
 resource "aws_instance" "tf-instance-4" {
-  ami           = "ami-080e1f13689e07408 "
+  ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.tf-subnet-4.id
   key_name      = "tf-key"
