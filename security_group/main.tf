@@ -1,6 +1,7 @@
 resource "aws_security_group" "tf_sg" {
   name        = "tf-sg"
   description = "Security group for Terraform resources"
+  vpc_id = var.vpc_id
 
   ingress {
     from_port   = 22

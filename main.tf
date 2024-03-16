@@ -5,6 +5,7 @@ module "vpc" {
 
 module "security_group" {
   source = "./security_group"
+  vpc_id = module.vpc.vpc_id
 }
 
 module "ec2" {
