@@ -85,45 +85,6 @@ resource "aws_route_table_association" "tf-subnet-4-association" {
   route_table_id = aws_route_table.tf-route-table.id
 }
 
-resource "aws_eip" "nat-eip" {
-  vpc = true
-   tags = {
-      Name = "nat-eip"
-      }
-}
-
-resource "aws_nat_gateway" "nat-gateway" {
-  allocation_id = aws_eip.nat-eip.id
-  subnet_id     = aws_subnet.tf-subnet-1.id
-  tags = {
-      Name = "nat-gateway"
-      }
-}
-
-resource "aws_nat_gateway" "nat-gateway" {
-  allocation_id = aws_eip.nat-eip.id
-  subnet_id     = aws_subnet.tf-subnet-2.id
-  tags = {
-      Name = "nat-gateway"
-      }
-}
-
-resource "aws_nat_gateway" "nat-gateway" {
-  allocation_id = aws_eip.nat-eip.id
-  subnet_id     = aws_subnet.tf-subnet-3.id
-  tags = {
-      Name = "nat-gateway"
-      }
-}
-
-resource "aws_nat_gateway" "nat-gateway" {
-  allocation_id = aws_eip.nat-eip.id
-  subnet_id     = aws_subnet.tf-subnet-4.id
-  tags = {
-      Name = "nat-gateway"
-      }
-}
-
 resource "aws_security_group" "web-sg" {
   vpc_id = aws_vpc.tf-vpc.id
   name   = "web-sg"
