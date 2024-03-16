@@ -1,7 +1,3 @@
-variable "region" {
-  description = "The AWS region"
-}
-
 variable "ami" {
   description = "The AMI ID for the EC2 instances"
 }

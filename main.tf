@@ -1,18 +1,14 @@
 module "vpc" {
   source = "./vpc"
-  region             = "us-east-1"
   vpc_cidr_block     = "192.168.0.0/16"
 }
 
 module "security_group" {
   source = "./security_group"
-  region = "us-east-1"
-  vpc_id = module.vpc.vpc_id  # Pass VPC ID here
 }
 
 module "ec2" {
   source = "./ec2"
-  region      = "us-east-1"
   ami         = "ami-02d7fd1c2af6eead0"
   instance_type = "t2.micro"
   ec2_count   = 4
