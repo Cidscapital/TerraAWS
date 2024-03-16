@@ -143,7 +143,7 @@ resource "aws_instance" "tf-instance-1" {
   ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.tf-subnet-1.id
-  vpc_security_group_ids = aws_security_group.web-sg.id
+  vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name      = "tf-key"
   tags = {
     Name = "tf-instance-1"
@@ -154,7 +154,7 @@ resource "aws_instance" "tf-instance-2" {
   ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.tf-subnet-2.id
-  vpc_security_group_ids = aws_security_group.web-sg.id
+  vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name      = "tf-key"
   tags = {
     Name = "tf-instance-2"
@@ -165,7 +165,7 @@ resource "aws_instance" "tf-instance-3" {
   ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.tf-subnet-3.id
-  vpc_security_group_ids = aws_security_group.web-sg.id
+  vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name      = "tf-key"
   tags = {
     Name = "tf-instance-3"
@@ -176,7 +176,7 @@ resource "aws_instance" "tf-instance-4" {
   ami           = "ami-080e1f13689e07408"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.tf-subnet-4.id
-  vpc_security_group_ids = aws_security_group.web-sg.id
+  vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name      = "tf-key"
   tags = {
     Name = "tf-instance-4"
