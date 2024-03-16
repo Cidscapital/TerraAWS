@@ -145,6 +145,15 @@ resource "aws_instance" "tf-instance-1" {
   subnet_id     = aws_subnet.tf-subnet-1.id
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name      = "tf-key"
+  user_data = <<-EOF
+    #!/bin/bash
+    apt update
+    apt install -y docker.io
+    docker pull nginx
+    docker run -d --name docker-nginx -p 80:80 nginx
+    docker run -d --name nginx-container-1 -p 8080:80 nginx
+    docker run -d --name nginx-container-2 -p 8081:80 nginx
+  EOF
   tags = {
     Name = "tf-instance-1"
   }
@@ -156,6 +165,15 @@ resource "aws_instance" "tf-instance-2" {
   subnet_id     = aws_subnet.tf-subnet-2.id
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name      = "tf-key"
+  user_data = <<-EOF
+    #!/bin/bash
+    apt update
+    apt install -y docker.io
+    docker pull nginx
+    docker run -d --name docker-nginx -p 80:80 nginx
+    docker run -d --name nginx-container-1 -p 8080:80 nginx
+    docker run -d --name nginx-container-2 -p 8081:80 nginx
+  EOF
   tags = {
     Name = "tf-instance-2"
   }
@@ -167,6 +185,15 @@ resource "aws_instance" "tf-instance-3" {
   subnet_id     = aws_subnet.tf-subnet-3.id
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name      = "tf-key"
+  user_data = <<-EOF
+    #!/bin/bash
+    apt update
+    apt install -y docker.io
+    docker pull nginx
+    docker run -d --name docker-nginx -p 80:80 nginx
+    docker run -d --name nginx-container-1 -p 8080:80 nginx
+    docker run -d --name nginx-container-2 -p 8081:80 nginx
+  EOF
   tags = {
     Name = "tf-instance-3"
   }
@@ -178,7 +205,42 @@ resource "aws_instance" "tf-instance-4" {
   subnet_id     = aws_subnet.tf-subnet-4.id
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   key_name      = "tf-key"
+  user_data = <<-EOF
+    #!/bin/bash
+    apt update
+    apt install -y docker.io
+    docker pull nginx
+    docker run -d --name docker-nginx -p 80:80 nginx
+    docker run -d --name nginx-container-1 -p 8080:80 nginx
+    docker run -d --name nginx-container-2 -p 8081:80 nginx
+  EOF
   tags = {
     Name = "tf-instance-4"
   }
+}
+
+output "vpc_id" {
+  value = aws_vpc.tf-vpc.id
+}
+
+output "subnet_ids" {
+  value = [
+    aws_subnet.tf-subnet-1.id,
+    aws_subnet.tf-subnet-2.id,
+    aws_subnet.tf-subnet-3.id,
+    aws_subnet.tf-subnet-4.id
+  ]
+}
+
+output "security_group_id" {
+  value = aws_security_group.web-sg.id
+}
+
+output "instance_ids" {
+  value = [
+    aws_instance.tf-instance-1.id,
+    aws_instance.tf-instance-2.id,
+    aws_instance.tf-instance-3.id,
+    aws_instance.tf-instance-4.id
+  ]
 }
