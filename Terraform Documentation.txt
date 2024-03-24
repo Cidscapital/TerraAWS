@@ -1,0 +1,41 @@
+Initial set up:
+
+1. Open AWS console and launch the cloudshell. 
+2. Follow the instructions below to install terraform in the cloudshell:
+
+	- Install yum-config-manager to manage your repositories.
+
+ 	$ sudo yum install -y yum-utils
+	
+	- Use yum-config-manager to add the official HashiCorp Linux repository.
+
+ 	$ sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+	
+	- Install Terraform from the new repository.
+
+ 	$ sudo yum -y install terraform
+
+
+3. Clone the git repository to the cloudshell and 'cd' into the cloned repository that contains the code.
+
+4. Type in the following commands respecively:
+
+	$ terraform init
+	$ terraform plan
+	$ terraform apply
+- type in 'yes' when prompted.
+
+5. The above command will spawn all the required resources and after 3-5 minutes your instances & web
+ servers will be up and running.
+
+6. If you want to ssh into the instances use the pem key attached to the zip file. You wil need a linux based environment to do so.
+7. To check whether the web servers are running, copy the public ip address and add a prefix: 
+	http://your-ip (- for port 80)
+	http://your-ip:8081 (- for port 8081)
+	http://your-ip:8080 (- for port 8080)
+You will see a NGINX default page being displayed. This proved the task was successfull.
+
+If you no longer need the instances due to cost or any other hindrances just use the command below in 
+the cloud shell to delete the instances and all its related resources at one go.
+
+	$ terraform destroy
